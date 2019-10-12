@@ -1,2 +1,0 @@
-# ReactApp
-Created with CodeSandbox
