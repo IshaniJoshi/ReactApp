@@ -5,6 +5,9 @@ import TextField from "material-ui/TextField";
 import React, { Component } from "react";
 import Component1 from "./Component1";
 
+var data = require('./Data.json');
+var flag=0;
+
 class Login extends Component {
   constructor(props) {
     super(props);
@@ -15,17 +18,35 @@ class Login extends Component {
   }
 
   handleClick(event) {
-    var uploadScreen = [];
-    uploadScreen.push(
-      <Component1
-        name={this.state.username}
-        appContext={this.props.appContext}
-      />
-    );
-    this.props.appContext.setState({
-      loginpage: [],
-      uploadScreen: uploadScreen
-    });
+    for (var i = 0; i < data.length; i++)
+    {
+      var obj = data[i];
+      if(obj.username==this.state.username && obj.password==this.state.password)
+{
+  var uploadScreen = [];
+  uploadScreen.push(
+    <Component1
+      name={this.state.username}
+      appContext={this.props.appContext}
+    />
+  );
+  this.props.appContext.setState({
+    loginpage: [],
+    uploadScreen: uploadScreen
+  });
+  flag=1;
+  break;
+}
+
+
+
+    }
+
+    if(flag==0)
+    {
+      alert("Incorrect username or password");
+    }
+    
   }
   render() {
     return (
